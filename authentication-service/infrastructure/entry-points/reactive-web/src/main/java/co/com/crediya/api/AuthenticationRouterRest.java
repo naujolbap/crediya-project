@@ -14,9 +14,7 @@ public class AuthenticationRouterRest {
         return RouterFunctions
                 .route()
                 .path("/api/v1",
-                        builder -> builder.GET("/usecase/path", authenticationHandlerV1::listenGETUseCase)
-                                .POST("/usecase/otherpath", authenticationHandlerV1::listenPOSTUseCase)
-                                .GET("/otherusercase/path", authenticationHandlerV1::listenGETOtherUseCase))
+                        builder -> builder.POST("/usuarios", authenticationHandlerV1::listenSaveUser))
                 .build();
     }
 }
