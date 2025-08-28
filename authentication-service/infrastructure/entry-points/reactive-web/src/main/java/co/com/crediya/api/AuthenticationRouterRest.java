@@ -11,8 +11,7 @@ public class AuthenticationRouterRest {
 
     @Bean
     public RouterFunction<ServerResponse> routerFunction(AuthenticationHandlerV1 authenticationHandlerV1) {
-        return RouterFunctions
-                .route()
+        return RouterFunctions.route()
                 .path("/api/v1",
                         builder -> builder.POST("/usuarios", authenticationHandlerV1::listenSaveUser))
                 .build();
