@@ -26,3 +26,12 @@ cors:
 routes:
   paths:
     users: "/api/v1/usuarios"
+
+adapters:
+  r2dbc:
+    host: "localhost"
+    port: 5432
+    database: "test"
+    schema: "public"
+    username: "test"
+    password: "P@55w0rd"

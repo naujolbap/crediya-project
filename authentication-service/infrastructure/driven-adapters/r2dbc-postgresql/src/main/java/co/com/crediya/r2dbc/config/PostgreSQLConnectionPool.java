@@ -22,7 +22,7 @@ public class PostgreSQLConnectionPool {
     public static final int DEFAULT_PORT = 5432;
 
     @Bean
-    public ConnectionPool getConnectionConfig(PostgresqlConnectionProperties properties) {
+    public ConnectionPool getConnectionConfig(PostgreSQLConnectionProperties properties) {
         var dbConfiguration = PostgresqlConnectionConfiguration.builder()
                 .host(properties.host())
                 .port(properties.port())
