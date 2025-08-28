@@ -13,8 +13,4 @@ public class UserUseCase {
     public Mono<User> saveUser(User user) {
         return userRepository.save(user);
     }
-
-    public Mono<User> findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
 }
