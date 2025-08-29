@@ -21,7 +21,12 @@ public class UserReactiveRepositoryAdapter
 
 
     @Override
-    public Mono<User> findByEmail(String email) {
+    public Mono<User> saveUser(User user) {
+        return super.save(user);
+    }
+
+    @Override
+    public Mono<User> findUserByEmail(String email) {
         var userEntity = new UserEntity();
         userEntity.setEmail(email);
         return repository.findOne(Example.of(userEntity)).map(this::toEntity);
