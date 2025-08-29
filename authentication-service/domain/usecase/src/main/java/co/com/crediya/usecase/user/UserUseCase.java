@@ -11,6 +11,6 @@ public class UserUseCase {
     private final UserRepository userRepository;
 
     public Mono<User> saveUser(User user) {
-        return userRepository.save(user);
+        return userRepository.saveUser(user);
     }
 }
