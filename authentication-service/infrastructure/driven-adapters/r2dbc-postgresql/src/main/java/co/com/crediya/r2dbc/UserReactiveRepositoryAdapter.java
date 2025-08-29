@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 @Repository
-public class ReactiveRepositoryAdapter extends ReactiveAdapterOperations<User, UserEntity, String, ReactiveRepository> implements UserRepository {
+public class UserReactiveRepositoryAdapter extends ReactiveAdapterOperations<User, UserEntity, String, UserReactiveRepository> implements UserRepository {
 
-    public ReactiveRepositoryAdapter(ReactiveRepository repository, ObjectMapper mapper) {
+    public UserReactiveRepositoryAdapter(UserReactiveRepository repository, ObjectMapper mapper) {
         super(repository, mapper, userEntity -> mapper.map(userEntity, User.class));
     }
 
