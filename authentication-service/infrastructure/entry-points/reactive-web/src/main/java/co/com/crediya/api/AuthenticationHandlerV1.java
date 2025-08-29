@@ -1,7 +1,9 @@
 package co.com.crediya.api;
 
+import co.com.crediya.api.dto.UserRequestDTO;
 import co.com.crediya.model.user.User;
 import co.com.crediya.usecase.user.UserUseCase;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -15,12 +17,14 @@ public class AuthenticationHandlerV1 {
 
     private final UserUseCase userUseCase;
 
+    private final ObjectMapper objectMapper;
+
     public Mono<ServerResponse> listenSaveUser(ServerRequest serverRequest) {
-        return serverRequest.bodyToMono(User.class)
+        return serverRequest.bodyToMono(UserRequestDTO.class)
+                .map(userRequestDTO -> objectMapper.convertValue(userRequestDTO, User.class))
                 .flatMap(userUseCase::saveUser)
-                .flatMap(savedUser -> ServerResponse.ok()
+                .flatMap(savedTask -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .bodyValue(savedUser)
-                );
+                        .bodyValue(savedTask));
     }
 }
