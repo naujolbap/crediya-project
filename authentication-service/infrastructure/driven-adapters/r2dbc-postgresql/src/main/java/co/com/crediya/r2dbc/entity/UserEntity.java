@@ -7,6 +7,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Table("users")
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class UserEntity {
 
     @Id
     @Column("user_id")
-    private String id;
+    private UUID id;
 
     private String name;
 
