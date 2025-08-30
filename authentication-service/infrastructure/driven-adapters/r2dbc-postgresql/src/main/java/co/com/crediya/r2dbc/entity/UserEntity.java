@@ -23,12 +23,15 @@ public class UserEntity {
 
     private String name;
 
+    @Column("last_name")
     private String lastName;
 
+    @Column("birth_date")
     private LocalDate birthDate;
 
     private String address;
 
+    @Column("phone_number")
     private String phoneNumber;
 
     private String email;
