@@ -23,8 +23,8 @@ public class AuthenticationHandlerV1 {
         return serverRequest.bodyToMono(UserRequestDTO.class)
                 .map(userRequestDTO -> objectMapper.convertValue(userRequestDTO, User.class))
                 .flatMap(userUseCase::saveUser)
-                .flatMap(savedTask -> ServerResponse.ok()
+                .flatMap(savedUser -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .bodyValue(savedTask));
+                        .bodyValue(savedUser));
     }
 }
