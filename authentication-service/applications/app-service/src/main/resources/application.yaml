@@ -31,7 +31,7 @@ adapters:
   r2dbc:
     host: "localhost"
     port: 5432
-    database: "test"
+    database: "local"
     schema: "public"
     username: "test"
     password: "P@55w0rd"
