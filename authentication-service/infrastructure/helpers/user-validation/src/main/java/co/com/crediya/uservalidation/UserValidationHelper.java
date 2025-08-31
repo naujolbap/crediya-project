@@ -1,7 +1,7 @@
-package co.com.crediya.api.service;
+package co.com.crediya.uservalidation;
 
 import co.com.crediya.api.dto.UserRequestDTO;
-import co.com.crediya.api.exception.ValidationException;
+import co.com.crediya.uservalidation.exception.UserValidationException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class UserValidationService {
+public class UserValidationHelper {
 
     private final Validator validator;
 
@@ -24,7 +24,7 @@ public class UserValidationService {
             String errorMessage = violations.stream()
                     .map(ConstraintViolation::getMessage)
                     .collect(Collectors.joining(", "));
-            return Mono.error(new ValidationException(errorMessage));
+            return Mono.error(new UserValidationException(errorMessage));
         }
 
         return Mono.just(userRequest);
