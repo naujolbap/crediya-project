@@ -5,10 +5,9 @@ import org.springframework.data.repository.query.ReactiveQueryByExampleExecutor;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
 import java.util.UUID;
 
 public interface UserReactiveRepository extends ReactiveCrudRepository<UserEntity, UUID>, ReactiveQueryByExampleExecutor<UserEntity> {
 
-    Optional<Mono<UserEntity>> findUserByEmail(String email);
+    Mono<UserEntity> findUserEntityByEmail(String email);
 }
