@@ -1,5 +1,9 @@
 package co.com.crediya.api.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -11,8 +15,12 @@ import java.time.LocalDate;
 @Builder(toBuilder = true)
 public class UserRequestDTO {
 
+    @NotNull(message = "El campo 'name' no puede ser nulo")
+    @NotBlank(message = "El campo 'name' no puede estar vacío")
     private String name;
 
+    @NotNull(message = "El campo 'lastName' no puede ser nulo")
+    @NotBlank(message = "El campo 'lastName' no puede estar vacío")
     private String lastName;
 
     private LocalDate birthDate;
@@ -21,8 +29,12 @@ public class UserRequestDTO {
 
     private String phoneNumber;
 
+    @NotNull(message = "El campo 'email' no puede ser nulo")
+    @Email(message = "El email debe tener un formato válido")
     private String email;
 
+    @NotNull(message = "El campo 'salary' no puede ser nulo")
+    @Positive(message = "El salario debe ser mayor que cero")
     private int salary;
 }
 
