@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserValidationException.class)
     public Mono<ResponseEntity<ErrorResponseDTO>> handleUserValidationException(UserValidationException ex) {
-        log.error("Validation error: {}", ex.getMessage());
+        log.error("Validation error: {}", ex.getMessage(), ex);
 
         ErrorResponseDTO errorResponse = new ErrorResponseDTO("VALIDATION_ERROR", ex.getMessage());
         return Mono.just(ResponseEntity.badRequest().body(errorResponse));
@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserAlreadyExistsException.class)
     public Mono<ResponseEntity<ErrorResponseDTO>> handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
-        log.error("User already exists error: {}", ex.getMessage());
+        log.error("User already exists error: {}", ex.getMessage(), ex);
 
         ErrorResponseDTO errorResponse = new ErrorResponseDTO("USER_ALREADY_EXISTS", ex.getMessage());
         return Mono.just(ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorResponse));
