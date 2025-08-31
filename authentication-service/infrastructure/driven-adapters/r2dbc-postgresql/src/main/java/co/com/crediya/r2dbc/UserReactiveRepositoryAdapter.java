@@ -7,7 +7,7 @@ import co.com.crediya.r2dbc.exception.UserAlreadyExistsException;
 import co.com.crediya.r2dbc.helper.ReactiveAdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.reactive.TransactionalOperator;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
@@ -16,17 +16,20 @@ import java.util.UUID;
 public class UserReactiveRepositoryAdapter
         extends ReactiveAdapterOperations<User, UserEntity, UUID, UserReactiveRepository> implements UserRepository {
 
-    public UserReactiveRepositoryAdapter(UserReactiveRepository repository, ObjectMapper mapper) {
+    private final TransactionalOperator operator;
+
+    public UserReactiveRepositoryAdapter(UserReactiveRepository repository, ObjectMapper mapper, TransactionalOperator operator) {
         super(repository, mapper, userEntity -> mapper.map(userEntity, User.class));
+        this.operator = operator;
     }
 
     @Override
-    @Transactional
     public Mono<User> saveUser(User user) {
-        return findUserByEmail(user.getEmail())
+        return this.findUserByEmail(user.getEmail())
                 .flatMap(userExisting -> Mono.error(new UserAlreadyExistsException()))
                 .cast(User.class)
-                .switchIfEmpty(Mono.defer(() -> save(user)));
+                .switchIfEmpty(Mono.defer(() -> super.save(user).as(operator::transactional)));
+
     }
 
     @Override
