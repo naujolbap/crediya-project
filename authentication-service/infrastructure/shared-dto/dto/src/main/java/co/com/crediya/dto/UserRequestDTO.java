@@ -1,6 +1,10 @@
 package co.com.crediya.dto;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -31,8 +35,7 @@ public class UserRequestDTO {
     private String email;
 
     @NotNull(message = "El campo 'salary' no puede ser nulo")
-    @Size(min = 1, max = 15000000, message = "El salario debe estar entre 1 y 15,000,000")
-    @Positive(message = "El salario debe ser mayor que cero")
+    @Min(value = 1, message = "El salario debe ser mayor a 0")
+    @Max(value = 15000000, message = "El salario debe ser menor o igual a 15,000,000")
     private int salary;
 }
-
