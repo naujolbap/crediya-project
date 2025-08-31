@@ -1,6 +1,6 @@
 package co.com.crediya.uservalidation;
 
-import co.com.crediya.api.dto.UserRequestDTO;
+import co.com.crediya.dto.UserRequestDTO;
 import co.com.crediya.uservalidation.exception.UserValidationException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;

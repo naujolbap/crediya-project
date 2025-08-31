@@ -1,7 +1,7 @@
 package co.com.crediya.api;
 
 import co.com.crediya.api.dto.ErrorResponseDTO;
-import co.com.crediya.api.dto.UserRequestDTO;
+import co.com.crediya.dto.UserRequestDTO;
 import co.com.crediya.model.user.User;
 import co.com.crediya.usecase.user.UserUseCase;
 import co.com.crediya.uservalidation.UserValidationHelper;
