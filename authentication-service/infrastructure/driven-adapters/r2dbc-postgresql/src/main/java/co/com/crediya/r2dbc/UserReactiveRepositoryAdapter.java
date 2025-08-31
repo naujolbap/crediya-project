@@ -7,6 +7,7 @@ import co.com.crediya.r2dbc.exception.UserAlreadyExistsException;
 import co.com.crediya.r2dbc.helper.ReactiveAdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
@@ -20,6 +21,7 @@ public class UserReactiveRepositoryAdapter
     }
 
     @Override
+    @Transactional
     public Mono<User> saveUser(User user) {
         return findUserByEmail(user.getEmail())
                 .flatMap(userExisting -> Mono.error(new UserAlreadyExistsException()))
@@ -29,7 +31,6 @@ public class UserReactiveRepositoryAdapter
 
     @Override
     public Mono<User> findUserByEmail(String email) {
-        return this.repository.findUserEntityByEmail(email)
-                .map(this::toEntity);
+        return this.repository.findUserEntityByEmail(email).map(this::toEntity);
     }
 }
